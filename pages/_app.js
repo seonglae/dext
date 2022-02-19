@@ -1,7 +1,8 @@
-import Head from 'next/head';
 import '../styles/index.scss';
 
-export default function App({ Component, pageProps }) {
+import Head from 'next/head';
+
+export default function App({Component, pageProps}) {
   return (
     <>
       <Head>
