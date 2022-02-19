@@ -9,12 +9,12 @@ import Search from 'components/Search'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { useSwitcher } from 'store/switcher'
-import { useMenu } from 'store/menu'
-import useLockBodyScroll from 'utils/useLockBodyScroll'
-import { useDocs } from 'store/docs'
+import useSwitcher from 'hooks/useSwitcher'
+import useMenu from 'hooks/useMenu'
+import useLockBodyScroll from 'hooks/useLockBodyScroll'
+import useDocs from 'hooks/useDocs'
 
-export default function Layout({ nav, toc, children }) {
+export default function Layout({ contentRef, nav, toc, children }) {
   const { isMenuOpen, toggleMenu, closeMenu } = useMenu()
   const { docs, currentDocs, getPrevAndNext } = useDocs()
 
@@ -103,7 +103,7 @@ export default function Layout({ nav, toc, children }) {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="mb-2 text-base text-gray-500 hover:text-gray-900 hover:underline"
-                      href={`https://github.com/pmndrs/website/tree/docs/docs${currentDocs[currentPageIndex].url}.mdx`}
+                      href={currentDocs[currentPageIndex].editURL}
                     >
                       Edit this page on GitHub
                     </a>
@@ -142,7 +142,7 @@ export default function Layout({ nav, toc, children }) {
               </div>
 
               <div className="flex-none hidden w-64 pl-8 mr-8 xl:text-sm xl:block">
-                {toc.length ? <Toc toc={toc} /> : null}
+                {toc.length ? <Toc contentRef={contentRef} toc={toc} /> : null}
               </div>
             </div>
           </div>
